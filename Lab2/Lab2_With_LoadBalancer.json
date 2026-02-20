@@ -23,15 +23,6 @@
             }
         },
         {
-            "type": "Microsoft.Compute/sshPublicKeys",
-            "apiVersion": "2024-11-01",
-            "name": "WEB2-LAB2",
-            "location": "eastus2",
-            "properties": {
-                "publicKey": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQD03WMg71ErlIeyjeMezaL3T/oaSl5fzSpvj1ogtLBB2KgaNmIp+sXAKPiN3e6/ONNR5cABbh1eS1ADn9zwDNH7J5azFlnG6Wp4I9iPT+87VMv+pbSICZs64s3hoLcJJAyvRfPw/4G/9hfBdoL1QsU/BS/+o4p7dlJhu9uAnz10cf/rBrft0CQoXNkIQclqfzyLh9GN/s86MvCP3ub7UraEtcwtgZEA76cEYcudxoQ1guGNSva1dtnYBNQqA+VT6HUXHW8QfjEo5/y+2M05wHKLZmJsPMpnqBBY+QhgG3IZbtJBEIDiBALbj4IywzupP9OTtBxMV4g3V1Yx+0OMm1THuDxbkPPKFgasfJ2JlyaqBobWmvI54Er/GmiqNKpBnTRJv+4QlhX5755O8OKDF+EJElJ3vYBPAxeCPqw9sZUDUVda10Tp4YLwbY8v6guxSSum9JrpsJ/Mrt4Sb+w+oEHbRoj5ZFKexD3whmEfb1ILrmIBfssv8kfDU6gRH5rLZJ0= generated-by-azure"
-            }
-        },
-        {
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2024-07-01",
             "name": "NSG-WEB",
@@ -82,7 +73,7 @@
         {
             "type": "Microsoft.Network/publicIPAddresses",
             "apiVersion": "2024-07-01",
-            "name": "Load_balancer_LAB2",
+            "name": "LB_EXTERNAL_IP",
             "location": "eastus2",
             "sku": {
                 "name": "Standard",
@@ -92,7 +83,6 @@
                 "2"
             ],
             "properties": {
-                "ipAddress": "20.246.106.214",
                 "publicIPAddressVersion": "IPv4",
                 "publicIPAllocationMethod": "Static",
                 "idleTimeoutInMinutes": 4,
@@ -115,7 +105,6 @@
                 "2"
             ],
             "properties": {
-                "ipAddress": "20.81.131.86",
                 "publicIPAddressVersion": "IPv4",
                 "publicIPAllocationMethod": "Static",
                 "idleTimeoutInMinutes": 4,
@@ -138,7 +127,6 @@
                 "2"
             ],
             "properties": {
-                "ipAddress": "20.186.94.94",
                 "publicIPAddressVersion": "IPv4",
                 "publicIPAllocationMethod": "Static",
                 "idleTimeoutInMinutes": 4,
@@ -167,7 +155,6 @@
                 "subnets": [
                     {
                         "name": "default",
-                        "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', 'VNET_LAB1', 'default')]",
                         "properties": {
                             "addressPrefixes": [
                                 "10.0.0.0/24"
@@ -175,12 +162,10 @@
                             "delegations": [],
                             "privateEndpointNetworkPolicies": "Disabled",
                             "privateLinkServiceNetworkPolicies": "Enabled"
-                        },
-                        "type": "Microsoft.Network/virtualNetworks/subnets"
+                        }
                     },
                     {
                         "name": "SUBNET-WEB",
-                        "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', 'VNET_LAB1', 'SUBNET-WEB')]",
                         "properties": {
                             "addressPrefixes": [
                                 "10.0.1.0/24"
@@ -188,8 +173,7 @@
                             "delegations": [],
                             "privateEndpointNetworkPolicies": "Disabled",
                             "privateLinkServiceNetworkPolicies": "Enabled"
-                        },
-                        "type": "Microsoft.Network/virtualNetworks/subnets"
+                        }
                     }
                 ],
                 "virtualNetworkPeerings": [],
@@ -223,12 +207,10 @@
                     },
                     "osDisk": {
                         "osType": "Linux",
-                        "name": "WEB1-LAB1_OsDisk_1_a4dd29f7635547a4926f7998eee46493",
                         "createOption": "FromImage",
                         "caching": "ReadWrite",
                         "managedDisk": {
-                            "storageAccountType": "Premium_LRS",
-                            "id": "[resourceId('Microsoft.Compute/disks', 'WEB1-LAB1_OsDisk_1_a4dd29f7635547a4926f7998eee46493')]"
+                            "storageAccountType": "Premium_LRS"
                         },
                         "deleteOption": "Detach",
                         "diskSizeGB": 30
@@ -259,8 +241,7 @@
                         }
                     },
                     "secrets": [],
-                    "allowExtensionOperations": true,
-                    "requireGuestProvisionSignal": true
+                    "allowExtensionOperations": true
                 },
                 "securityProfile": {
                     "uefiSettings": {
@@ -313,12 +294,10 @@
                     },
                     "osDisk": {
                         "osType": "Linux",
-                        "name": "WEB2-LAB2_OsDisk_1_291d13d20801441385c0aa15c05cefad",
                         "createOption": "FromImage",
                         "caching": "ReadWrite",
                         "managedDisk": {
-                            "storageAccountType": "Premium_LRS",
-                            "id": "/subscriptions/ecaa640f-45d9-4b54-ad18-8f884fdf1c08/resourceGroups/RG-LAB2/providers/Microsoft.Compute/disks/WEB2-LAB2_OsDisk_1_291d13d20801441385c0aa15c05cefad"
+                            "storageAccountType": "Premium_LRS"
                         },
                         "deleteOption": "Detach",
                         "diskSizeGB": 30
@@ -349,8 +328,7 @@
                         }
                     },
                     "secrets": [],
-                    "allowExtensionOperations": true,
-                    "requireGuestProvisionSignal": true
+                    "allowExtensionOperations": true
                 },
                 "securityProfile": {
                     "uefiSettings": {
@@ -377,54 +355,6 @@
             }
         },
         {
-            "type": "Microsoft.Compute/virtualMachines/extensions",
-            "apiVersion": "2024-11-01",
-            "name": "WEB1-LAB1/enablevmAccess",
-            "location": "eastus2",
-            "dependsOn": [
-                "[resourceId('Microsoft.Compute/virtualMachines', 'WEB1-LAB1')]"
-            ],
-            "properties": {
-                "autoUpgradeMinorVersion": true,
-                "publisher": "Microsoft.OSTCExtensions",
-                "type": "VMAccessForLinux",
-                "typeHandlerVersion": "1.5",
-                "settings": {},
-                "protectedSettings": {
-                    "username": null,
-                    "password": null,
-                    "ssh_key": null,
-                    "reset_ssh": null,
-                    "remove_user": null,
-                    "expiration": null
-                }
-            }
-        },
-        {
-            "type": "Microsoft.Compute/virtualMachines/extensions",
-            "apiVersion": "2024-11-01",
-            "name": "WEB2-LAB2/enablevmAccess",
-            "location": "eastus2",
-            "dependsOn": [
-                "[resourceId('Microsoft.Compute/virtualMachines', 'WEB2-LAB2')]"
-            ],
-            "properties": {
-                "autoUpgradeMinorVersion": true,
-                "publisher": "Microsoft.OSTCExtensions",
-                "type": "VMAccessForLinux",
-                "typeHandlerVersion": "1.5",
-                "settings": {},
-                "protectedSettings": {
-                    "username": null,
-                    "password": null,
-                    "ssh_key": null,
-                    "reset_ssh": null,
-                    "remove_user": null,
-                    "expiration": null
-                }
-            }
-        },
-        {
             "type": "Microsoft.Network/bastionHosts",
             "apiVersion": "2024-07-01",
             "name": "VNET_LAB1-bastion",
@@ -442,120 +372,6 @@
                     "id": "[resourceId('Microsoft.Network/virtualNetworks', 'VNET_LAB1')]"
                 },
                 "ipConfigurations": []
-            }
-        },
-        {
-            "type": "Microsoft.Network/loadBalancers",
-            "apiVersion": "2024-07-01",
-            "name": "LoadBalancer",
-            "location": "eastus2",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/publicIPAddresses', 'Load_balancer_LAB2')]"
-            ],
-            "sku": {
-                "name": "Standard",
-                "tier": "Regional"
-            },
-            "properties": {
-                "frontendIPConfigurations": [
-                    {
-                        "name": "FrontIP",
-                        "id": "[concat(resourceId('Microsoft.Network/loadBalancers', 'LoadBalancer'), '/frontendIPConfigurations/FrontIP')]",
-                        "properties": {
-                            "privateIPAllocationMethod": "Dynamic",
-                            "publicIPAddress": {
-                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', 'Load_balancer_LAB2')]"
-                            }
-                        }
-                    }
-                ],
-                "backendAddressPools": [
-                    {
-                        "name": "NicPool",
-                        "id": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools', 'LoadBalancer', 'NicPool')]",
-                        "properties": {
-                            "loadBalancerBackendAddresses": [
-                                {
-                                    "name": "RG-LAB2_web2-lab1705_z2ipconfig1",
-                                    "properties": {}
-                                },
-                                {
-                                    "name": "RG-LAB2_web1-lab1705_z2ipconfig1",
-                                    "properties": {}
-                                }
-                            ]
-                        }
-                    }
-                ],
-                "loadBalancingRules": [
-                    {
-                        "name": "LoadBalancer",
-                        "id": "[concat(resourceId('Microsoft.Network/loadBalancers', 'LoadBalancer'), '/loadBalancingRules/LoadBalancer')]",
-                        "properties": {
-                            "frontendIPConfiguration": {
-                                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', 'LoadBalancer'), '/frontendIPConfigurations/FrontIP')]"
-                            },
-                            "frontendPort": 80,
-                            "backendPort": 80,
-                            "enableFloatingIP": false,
-                            "idleTimeoutInMinutes": 4,
-                            "protocol": "Tcp",
-                            "enableTcpReset": false,
-                            "loadDistribution": "Default",
-                            "disableOutboundSnat": true,
-                            "enableConnectionTracking": false,
-                            "backendAddressPool": {
-                                "id": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools', 'LoadBalancer', 'NicPool')]"
-                            },
-                            "backendAddressPools": [
-                                {
-                                    "id": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools', 'LoadBalancer', 'NicPool')]"
-                                }
-                            ],
-                            "probe": {
-                                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', 'LoadBalancer'), '/probes/HTTP_probe')]"
-                            }
-                        }
-                    }
-                ],
-                "probes": [
-                    {
-                        "name": "HTTP_probe",
-                        "id": "[concat(resourceId('Microsoft.Network/loadBalancers', 'LoadBalancer'), '/probes/HTTP_probe')]",
-                        "properties": {
-                            "protocol": "Http",
-                            "port": 80,
-                            "requestPath": "/",
-                            "intervalInSeconds": 5,
-                            "numberOfProbes": 1,
-                            "probeThreshold": 1,
-                            "noHealthyBackendsBehavior": "AllProbedDown"
-                        }
-                    }
-                ],
-                "inboundNatRules": [],
-                "outboundRules": [],
-                "inboundNatPools": []
-            }
-        },
-        {
-            "type": "Microsoft.Network/loadBalancers/backendAddressPools",
-            "apiVersion": "2024-07-01",
-            "name": "LoadBalancer/NicPool",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/loadBalancers', 'LoadBalancer')]"
-            ],
-            "properties": {
-                "loadBalancerBackendAddresses": [
-                    {
-                        "name": "RG-LAB2_web2-lab1705_z2ipconfig1",
-                        "properties": {}
-                    },
-                    {
-                        "name": "RG-LAB2_web1-lab1705_z2ipconfig1",
-                        "properties": {}
-                    }
-                ]
             }
         },
         {
@@ -603,6 +419,234 @@
             }
         },
         {
+            "type": "Microsoft.Network/loadBalancers",
+            "apiVersion": "2024-07-01",
+            "name": "LB_LAB2",
+            "location": "eastus2",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', 'LB_EXTERNAL_IP')]",
+                "[resourceId('Microsoft.Network/virtualNetworks', 'VNET_LAB1')]"
+            ],
+            "sku": {
+                "name": "Standard",
+                "tier": "Regional"
+            },
+            "properties": {
+                "frontendIPConfigurations": [
+                    {
+                        "name": "FRONTIP",
+                        "properties": {
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', 'LB_EXTERNAL_IP')]"
+                            }
+                        }
+                    }
+                ],
+                "backendAddressPools": [
+                    {
+                        "name": "BP_STATICIP",
+                        "properties": {
+                            "loadBalancerBackendAddresses": [
+                                {
+                                    "name": "592ed2d6-ba68-4cd4-bd14-600296cccf4a",
+                                    "properties": {
+                                        "ipAddress": "10.0.1.4",
+                                        "virtualNetwork": {
+                                            "id": "[resourceId('Microsoft.Network/virtualNetworks', 'VNET_LAB1')]"
+                                        }
+                                    }
+                                },
+                                {
+                                    "name": "3f40d8f2-04ef-4e09-b046-df7382c8bf73",
+                                    "properties": {
+                                        "ipAddress": "10.0.1.5",
+                                        "virtualNetwork": {
+                                            "id": "[resourceId('Microsoft.Network/virtualNetworks', 'VNET_LAB1')]"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "loadBalancingRules": [
+                    {
+                        "name": "LB_HTTP_PROBE",
+                        "properties": {
+                            "frontendIPConfiguration": {
+                                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', 'LB_LAB2'), '/frontendIPConfigurations/FRONTIP')]"
+                            },
+                            "frontendPort": 80,
+                            "backendPort": 80,
+                            "enableFloatingIP": false,
+                            "idleTimeoutInMinutes": 4,
+                            "protocol": "Tcp",
+                            "enableTcpReset": false,
+                            "loadDistribution": "Default",
+                            "disableOutboundSnat": true,
+                            "enableConnectionTracking": false,
+                            "backendAddressPool": {
+                                "id": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools', 'LB_LAB2', 'BP_STATICIP')]"
+                            },
+                            "backendAddressPools": [
+                                {
+                                    "id": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools', 'LB_LAB2', 'BP_STATICIP')]"
+                                }
+                            ],
+                            "probe": {
+                                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', 'LB_LAB2'), '/probes/HTTP_PROBE')]"
+                            }
+                        }
+                    }
+                ],
+                "probes": [
+                    {
+                        "name": "HTTP_PROBE",
+                        "properties": {
+                            "protocol": "Http",
+                            "port": 80,
+                            "requestPath": "/",
+                            "intervalInSeconds": 5,
+                            "numberOfProbes": 1,
+                            "probeThreshold": 1,
+                            "noHealthyBackendsBehavior": "AllProbedDown"
+                        }
+                    }
+                ],
+                "inboundNatRules": [],
+                "outboundRules": [],
+                "inboundNatPools": []
+            }
+        },
+        {
+            "type": "Microsoft.Network/loadBalancers/backendAddressPools",
+            "apiVersion": "2024-07-01",
+            "name": "LB_LAB2/BP_STATICIP",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/loadBalancers', 'LB_LAB2')]",
+                "[resourceId('Microsoft.Network/virtualNetworks', 'VNET_LAB1')]"
+            ],
+            "properties": {
+                "loadBalancerBackendAddresses": [
+                    {
+                        "name": "592ed2d6-ba68-4cd4-bd14-600296cccf4a",
+                        "properties": {
+                            "ipAddress": "10.0.1.4",
+                            "virtualNetwork": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks', 'VNET_LAB1')]"
+                            }
+                        }
+                    },
+                    {
+                        "name": "3f40d8f2-04ef-4e09-b046-df7382c8bf73",
+                        "properties": {
+                            "ipAddress": "10.0.1.5",
+                            "virtualNetwork": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks', 'VNET_LAB1')]"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2024-07-01",
+            "name": "web1-lab1705_z2",
+            "location": "eastus2",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', 'WEB1-LAB1-ip')]",
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', 'VNET_LAB1', 'SUBNET-WEB')]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', 'NSG-WEB')]"
+            ],
+            "kind": "Regular",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "id": "[concat(resourceId('Microsoft.Network/networkInterfaces', 'web1-lab1705_z2'), '/ipConfigurations/ipconfig1')]",
+                        "type": "Microsoft.Network/networkInterfaces/ipConfigurations",
+                        "properties": {
+                            "privateIPAddress": "10.0.1.4",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', 'WEB1-LAB1-ip')]",
+                                "properties": {
+                                    "deleteOption": "Detach"
+                                }
+                            },
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', 'VNET_LAB1', 'SUBNET-WEB')]"
+                            },
+                            "primary": true,
+                            "privateIPAddressVersion": "IPv4"
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": []
+                },
+                "enableAcceleratedNetworking": true,
+                "enableIPForwarding": false,
+                "disableTcpStateTracking": false,
+                "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'NSG-WEB')]"
+                },
+                "nicType": "Standard",
+                "auxiliaryMode": "None",
+                "auxiliarySku": "None"
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2024-07-01",
+            "name": "web2-lab1705_z2",
+            "location": "eastus2",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', 'WEB2-LAB2-ip')]",
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', 'VNET_LAB1', 'SUBNET-WEB')]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', 'NSG-WEB')]"
+            ],
+            "kind": "Regular",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "id": "[concat(resourceId('Microsoft.Network/networkInterfaces', 'web2-lab1705_z2'), '/ipConfigurations/ipconfig1')]",
+                        "type": "Microsoft.Network/networkInterfaces/ipConfigurations",
+                        "properties": {
+                            "privateIPAddress": "10.0.1.5",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', 'WEB2-LAB2-ip')]",
+                                "properties": {
+                                    "deleteOption": "Detach"
+                                }
+                            },
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', 'VNET_LAB1', 'SUBNET-WEB')]"
+                            },
+                            "primary": true,
+                            "privateIPAddressVersion": "IPv4"
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": []
+                },
+                "enableAcceleratedNetworking": true,
+                "enableIPForwarding": false,
+                "disableTcpStateTracking": false,
+                "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'NSG-WEB')]"
+                },
+                "nicType": "Standard",
+                "auxiliaryMode": "None",
+                "auxiliarySku": "None"
+            }
+        },
+        {
             "type": "Microsoft.Network/virtualNetworks/subnets",
             "apiVersion": "2024-07-01",
             "name": "VNET_LAB1/default",
@@ -632,108 +676,6 @@
                 "delegations": [],
                 "privateEndpointNetworkPolicies": "Disabled",
                 "privateLinkServiceNetworkPolicies": "Enabled"
-            }
-        },
-        {
-            "type": "Microsoft.Network/networkInterfaces",
-            "apiVersion": "2024-07-01",
-            "name": "web1-lab1705_z2",
-            "location": "eastus2",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/publicIPAddresses', 'WEB1-LAB1-ip')]",
-                "[resourceId('Microsoft.Network/virtualNetworks/subnets', 'VNET_LAB1', 'SUBNET-WEB')]",
-                "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools', 'LoadBalancer', 'NicPool')]",
-                "[resourceId('Microsoft.Network/networkSecurityGroups', 'NSG-WEB')]"
-            ],
-            "kind": "Regular",
-            "properties": {
-                "ipConfigurations": [
-                    {
-                        "name": "ipconfig1",
-                        "id": "[concat(resourceId('Microsoft.Network/networkInterfaces', 'web1-lab1705_z2'), '/ipConfigurations/ipconfig1')]",
-                        "type": "Microsoft.Network/networkInterfaces/ipConfigurations",
-                        "properties": {
-                            "privateIPAddress": "10.0.1.5",
-                            "privateIPAllocationMethod": "Static",
-                            "publicIPAddress": {
-                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', 'WEB1-LAB1-ip')]"
-                            },
-                            "subnet": {
-                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', 'VNET_LAB1', 'SUBNET-WEB')]"
-                            },
-                            "primary": true,
-                            "privateIPAddressVersion": "IPv4",
-                            "loadBalancerBackendAddressPools": [
-                                {
-                                    "id": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools', 'LoadBalancer', 'NicPool')]"
-                                }
-                            ]
-                        }
-                    }
-                ],
-                "dnsSettings": {
-                    "dnsServers": []
-                },
-                "enableAcceleratedNetworking": true,
-                "enableIPForwarding": false,
-                "disableTcpStateTracking": false,
-                "networkSecurityGroup": {
-                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'NSG-WEB')]"
-                },
-                "nicType": "Standard",
-                "auxiliaryMode": "None",
-                "auxiliarySku": "None"
-            }
-        },
-        {
-            "type": "Microsoft.Network/networkInterfaces",
-            "apiVersion": "2024-07-01",
-            "name": "web2-lab1705_z2",
-            "location": "eastus2",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/publicIPAddresses', 'WEB2-LAB2-ip')]",
-                "[resourceId('Microsoft.Network/virtualNetworks/subnets', 'VNET_LAB1', 'SUBNET-WEB')]",
-                "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools', 'LoadBalancer', 'NicPool')]",
-                "[resourceId('Microsoft.Network/networkSecurityGroups', 'NSG-WEB')]"
-            ],
-            "kind": "Regular",
-            "properties": {
-                "ipConfigurations": [
-                    {
-                        "name": "ipconfig1",
-                        "id": "[concat(resourceId('Microsoft.Network/networkInterfaces', 'web2-lab1705_z2'), '/ipConfigurations/ipconfig1')]",
-                        "type": "Microsoft.Network/networkInterfaces/ipConfigurations",
-                        "properties": {
-                            "privateIPAddress": "10.0.1.4",
-                            "privateIPAllocationMethod": "Dynamic",
-                            "publicIPAddress": {
-                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', 'WEB2-LAB2-ip')]"
-                            },
-                            "subnet": {
-                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', 'VNET_LAB1', 'SUBNET-WEB')]"
-                            },
-                            "primary": true,
-                            "privateIPAddressVersion": "IPv4",
-                            "loadBalancerBackendAddressPools": [
-                                {
-                                    "id": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools', 'LoadBalancer', 'NicPool')]"
-                                }
-                            ]
-                        }
-                    }
-                ],
-                "dnsSettings": {
-                    "dnsServers": []
-                },
-                "enableAcceleratedNetworking": true,
-                "enableIPForwarding": false,
-                "disableTcpStateTracking": false,
-                "networkSecurityGroup": {
-                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'NSG-WEB')]"
-                },
-                "nicType": "Standard",
-                "auxiliaryMode": "None",
-                "auxiliarySku": "None"
             }
         }
     ]
